@@ -22,14 +22,26 @@ mysqlConnection.connect((error) => {
 
 app.listen(3005, () => console.log("Express server at port 3005"));
 
+//Get all product
 app.get("/product/list", (request,response) => {
   console.log("hii");
   mysqlConnection.query("SELECT * from product", (error, rows, field) => {
     if (!error) {
-      console.log(rows);
+      //console.log(rows);
       response.send(rows);
     } else {
       console.log(error);
     }
   });
 });
+
+function e1() {
+    var u='',i=0;
+    while(i++<36) {
+        var c='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'[i-1],r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);
+        u+=(c=='-'||c=='4')?c:v.toString(16)
+    }
+    return u;
+}
+
+console.log(e1())
