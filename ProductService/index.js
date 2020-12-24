@@ -1,10 +1,10 @@
-const mysql= require('mysql');
-const express=require('express');
-var app=express();
-const bodyparser=require('body-parser');
-const { request, response } = require('express');
+const mysql = require('mysql');
+const express = require('express');
+var app = express();
+const bodyparser = require('body-parser');
 
-app.use(bodyparser.json)
+
+app.use(bodyparser.json());
 
 var mysqlConnection= mysql.createConnection({
     host:'localhost',
@@ -23,10 +23,12 @@ mysqlConnection.connect((error)=>{
 
 app.listen(3005,()=>console.log('Express server at port 3005'));
 
-app.get('/product/list',(request,response)=>{
-    mysqlConnection.query('SELECT * from product',(error,rows,field)=>{
+//1.c
+app.get('/product/list', (req,res) => {
+    mysqlConnection.query('SELECT * from product',(error,rows,fields)=>{
        if(!error) {
-           response.send(rows);
+           console.log(rows);
+           res.send(rows);
        }else{
            console.log(error);
        }
