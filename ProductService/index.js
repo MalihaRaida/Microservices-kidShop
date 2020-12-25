@@ -7,8 +7,8 @@ app.use(bodyparser.json());
 
 var mysqlConnection = mysql.createConnection({
   host: "localhost",
-  user: "user",
-  password: "1234",
+  user: "root",
+  password: "",
   database: "productService",
   multipleStatements: true
 });
@@ -17,7 +17,7 @@ mysqlConnection.connect((error) => {
   if (!error) {
     console.log("Succeded");
   } else {
-    console.log("Failed");
+    console.log(error);
   }
 });
 
@@ -43,7 +43,6 @@ function e1() {
     }
     return u;
 }
-console.log(e1())
 
 //Delete a product
 app.delete("/product/remove/:id", (request,response) => {
@@ -81,3 +80,25 @@ app.post('/product/add', (req, res) => {
   })
 });
         
+app.post('/product/add', (req, res) => {
+  let productinput = req.body;
+  var guid = e1();
+  var sql = "SET @name = ?;SET @categoryId = ?;SET @guid=?;\
+  CALL productAdd(@guid, @name, @categoryId, @output);\
+  select @output";
+  mysqlConnection.query(sql, [productinput.name,  productinput.categoryId, guid], (error, rows, fields) => {
+      //console.log(rows[4][0]['@output'])
+      let status=rows[4][0]['@output']
+      if (status=='YES'){
+          res.status(400).send("Duplicate product name")
+      }
+      else{
+          if (!error) {
+              //console.log(rows);
+              res.status(201).send("Added Successfully");
+          }
+          else
+              res.status(500).send(error);
+          }
+  })
+});
