@@ -24,7 +24,6 @@ app.listen(3005, () => console.log("Express server at port 3005"));
 
 //Get all product
 app.get("/product/list", (request,response) => {
-  console.log("hii");
   mysqlConnection.query("SELECT * from product", (error, rows, field) => {
     if (!error) {
       //console.log(rows);
@@ -45,3 +44,15 @@ function e1() {
 }
 
 console.log(e1())
+
+//De a product
+app.delete("/product/remove/:id", (request,response) => {
+  mysqlConnection.query("DELETE from product where id=?",[request.params.id], (error, rows, field) => {
+    if (!error) {
+      //console.log(rows);
+      response.send("Deleted Successfully");
+    } else {
+      console.log(error);
+    }
+  });
+});
