@@ -30,5 +30,12 @@ namespace RatingService.Controllers
         {
             repository.CreateRating(rate);
         }
+
+        [HttpPut]
+        public void Put([FromBody] Rating rate)
+        {
+            repository.UpdateRate(rate);
+        }
+
     }
 }
