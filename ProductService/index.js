@@ -10,6 +10,7 @@ var mysqlConnection = mysql.createConnection({
   user: "user",
   password: "1234",
   database: "productService",
+  multipleStatements: true
 });
 
 mysqlConnection.connect((error) => {
@@ -42,10 +43,9 @@ function e1() {
     }
     return u;
 }
-
 console.log(e1())
 
-//De a product
+//Delete a product
 app.delete("/product/remove/:id", (request,response) => {
   mysqlConnection.query("DELETE from product where id=?",[request.params.id], (error, rows, field) => {
     if (!error) {
@@ -56,3 +56,28 @@ app.delete("/product/remove/:id", (request,response) => {
     }
   });
 });
+
+//post
+app.post('/product/add', (req, res) => {
+  let productinput = req.body;
+  var guid = e1();
+  var sql = "SET @name = ?;SET @categoryId = ?;SET @guid=?;\
+  CALL productAdd(@guid, @name, @categoryId, @output);\
+  select @output";
+  mysqlConnection.query(sql, [productinput.name,  productinput.categoryId, guid], (error, rows, fields) => {
+      //console.log(rows[4][0]['@output'])
+      let status=rows[4][0]['@output']
+      if (status=='YES'){
+          res.status(400).send("Duplicate product name")
+      }
+      else{
+          if (!error) {
+              //console.log(rows);
+              res.status(201).send("Added Successfully");
+          }
+          else
+              res.status(500).send(error);
+          }
+  })
+});
+        
