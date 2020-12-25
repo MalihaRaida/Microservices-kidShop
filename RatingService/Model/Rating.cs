@@ -9,7 +9,7 @@ namespace RatingService.Model
     {
         public Guid Id { get; set; }
         public Guid productId { get; set; }
-        public int rating { get; set; }
+        public float rating { get; set; }
         public Guid raterId { get; set; }
     }
 }
