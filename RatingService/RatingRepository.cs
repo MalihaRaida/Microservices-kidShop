@@ -4,12 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace RatingService
 {
     public class RatingRepository
     {
+        HttpClientHandler clientHandler = new HttpClientHandler();
+
+        public RatingRepository()
+        {
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) =>{ return true; };
+        }
+        
         private List<Rating> LoadData()
         {
             var dataString = File.ReadAllText("F:\\3-2\\SWE 4601(Software Design and Architecture)\\assignment 3\\Microservices-kidShop\\RatingService\\Data\\rating.json");
@@ -35,19 +43,22 @@ namespace RatingService
         internal void CreateRating(Rating rate)
         {
             var allRates = LoadData();
-            var findRate = allRates.Find(c => c.productId == rate.productId && c.raterId==rate.raterId);
-            if (findRate == null)
-            {
-                Console.WriteLine("New Rating");
-                rate.Id = Guid.NewGuid();
-                allRates.Add(rate);
-                SaveData(allRates);
-            }
-            else
-            {
-                findRate.rating = rate.rating;
-                SaveData(allRates);
-            }
+            Console.WriteLine("New Rating");
+            rate.Id = Guid.NewGuid();
+            allRates.Add(rate);
+            SaveData(allRates);
+        }
+        internal void UpdateRate(Rating rate)
+        {
+            var allRates = LoadData();
+            var findRate = allRates.Find(c => c.productId == rate.productId && c.raterId == rate.raterId);
+            Console.WriteLine("Update Rating");
+            findRate.rating = rate.rating;
+            SaveData(allRates);
+        }
+
+        private void UpdateProductRating()
+        {
 
         }
     }
