@@ -10,6 +10,7 @@ var mysqlConnection = mysql.createConnection({
   user: "user",
   password: "1234",
   database: "productService",
+  multipleStatements: true
 });
 
 mysqlConnection.connect((error) => {
@@ -24,7 +25,6 @@ app.listen(3005, () => console.log("Express server at port 3005"));
 
 //Get all product
 app.get("/product/list", (request,response) => {
-  console.log("hii");
   mysqlConnection.query("SELECT * from product", (error, rows, field) => {
     if (!error) {
       //console.log(rows);
@@ -43,5 +43,41 @@ function e1() {
     }
     return u;
 }
-
 console.log(e1())
+
+//Delete a product
+app.delete("/product/remove/:id", (request,response) => {
+  mysqlConnection.query("DELETE from product where id=?",[request.params.id], (error, rows, field) => {
+    if (!error) {
+      //console.log(rows);
+      response.send("Deleted Successfully");
+    } else {
+      console.log(error);
+    }
+  });
+});
+
+//post
+app.post('/product/add', (req, res) => {
+  let productinput = req.body;
+  var guid = e1();
+  var sql = "SET @name = ?;SET @categoryId = ?;SET @guid=?;\
+  CALL productAdd(@guid, @name, @categoryId, @output);\
+  select @output";
+  mysqlConnection.query(sql, [productinput.name,  productinput.categoryId, guid], (error, rows, fields) => {
+      //console.log(rows[4][0]['@output'])
+      let status=rows[4][0]['@output']
+      if (status=='YES'){
+          res.status(400).send("Duplicate product name")
+      }
+      else{
+          if (!error) {
+              //console.log(rows);
+              res.status(201).send("Added Successfully");
+          }
+          else
+              res.status(500).send(error);
+          }
+  })
+});
+        
