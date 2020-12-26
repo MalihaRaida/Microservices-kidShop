@@ -22,4 +22,4 @@ Opening the _RatingService.sln_ solution in Visual Studio
 
 then in the _RatingRepository.cs_ file _LoadData()_ and _SaveData()_ have the address of the _rating.json_ which needs to be changed according to the path taken from the properties of the file _rating.json_.
 
-## The RatingService is built on .Net Core 3.1 framework ##
+#### The RatingService is built on .Net Core 3.1 framework ####
