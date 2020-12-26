@@ -1,15 +1,15 @@
 use productservice;
 
-drop procedure if exists productUpdate;
+drop procedure if exists ratingUpdate;
 create procedure ratingUpdate
 (
 IN productId varchar(36),
-IN averageRating float,
-IN numberOfRaters int
+IN avgRate float,
+IN numOfRaters int
 )
 BEGIN
     update product
-        set product.averageRating=averageRating and
-                                  product.numberOfRaters
+        set product.averageRating=avgRate and
+                                  product.numberOfRaters=numOfRaters
     where product.id=productId;
 end;

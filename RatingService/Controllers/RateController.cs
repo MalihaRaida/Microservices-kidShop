@@ -29,6 +29,7 @@ namespace RatingService.Controllers
         public void Post([FromBody] Rating rate)
         {
             repository.CreateRating(rate);
+            
         }
 
         [HttpPut]

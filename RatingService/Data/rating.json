@@ -1,8 +1,44 @@
 [
   {
-    "Id": "e676a430-2aa0-4f1c-a1ad-000f04799635",
-    "productId": "667a7a30-9c94-4c2f-af24-71525b4889e1",
-    "rating": 4.0,
+    "Id": "bcc62987-5622-4666-a6b2-64d692cbd1dc",
+    "productId": "d30109c9-c98f-4580-8239-288a2ff3f634",
+    "rating": 2.0,
     "raterId": "1750f245-cb4d-4234-9a89-ff557e38edbc"
+  },
+  {
+    "Id": "91ffcde1-9d8d-4222-8985-31b1d1d7fb1a",
+    "productId": "10747dbb-1165-4da6-b471-75ca6c7ece8c",
+    "rating": 2.0,
+    "raterId": "1750f245-cb4d-4234-9a89-ff557e38edbc"
+  },
+  {
+    "Id": "a3116caf-fbf8-4fb9-8dea-6c24c97e45ce",
+    "productId": "d30109c9-c98f-4580-8239-288a2ff3f634",
+    "rating": 3.0,
+    "raterId": "847435b4-125c-4bfc-9d03-9832b3aacd64"
+  },
+  {
+    "Id": "5cd4a49a-4ccd-43fd-82fb-763684cb3a38",
+    "productId": "7bbb5db0-1ce8-4a7d-91a6-4cdefc8c9d5c",
+    "rating": 3.0,
+    "raterId": "847435b4-125c-4bfc-9d03-9832b3aacd64"
+  },
+  {
+    "Id": "c3737942-b078-4ea4-956b-2c8176bfe7f2",
+    "productId": "250afc7a-6c7d-4518-91b4-671bba502908",
+    "rating": 3.0,
+    "raterId": "847435b4-125c-4bfc-9d03-9832b3aacd64"
+  },
+  {
+    "Id": "90fe9aee-685a-477a-af4e-43eac191d36a",
+    "productId": "250afc7a-6c7d-4518-91b4-671bba502908",
+    "rating": 3.0,
+    "raterId": "847435b4-125c-4bfc-9d03-9832b3aacd64"
+  },
+  {
+    "Id": "e06ff0cb-d86c-4d93-849b-560634978acf",
+    "productId": "1f7d5f76-6f88-48ec-be43-d529ac16c326",
+    "rating": 3.0,
+    "raterId": "847435b4-125c-4bfc-9d03-9832b3aacd64"
   }
 ]
