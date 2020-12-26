@@ -46,7 +46,6 @@ function e1() {
   }
   return u;
 }
-//console.log(e1());
 
 //Delete a product
 app.delete("/product/remove/:id", (request, response) => {
@@ -93,15 +92,37 @@ app.post("/product/add", (req, res) => {
 //update product category
 app.put("/product/updateCategory", (req, res) => {
   let productinput = req.body;
-  var sql ="SET @id=?; SET @categoryId = ?; \
+  var sql =
+    "SET @id=?; SET @categoryId = ?; \
   CALL categoryUpdate(@id,@categoryId);";
-  mysqlConnection.query(sql,[productinput.id, productinput.categoryId],(err, rows, fields) => 
-  {
-      if (!err) 
-        res.send("Updated successfully");
-      else 
-        console.log(err);
+  mysqlConnection.query(
+    sql,
+    [productinput.id, productinput.categoryId],
+    (err, rows, fields) => {
+      if (!err) res.send("Updated successfully");
+      else console.log(err);
     }
   );
 });
-        
+
+//update product rate update
+
+app.put("/product/updateRating", (req, res) => {
+  let productinput = req.body;
+  var sql =
+    "SET @productId=?; SET @averageRating = ?;SET @numberOfRaters=?; \
+  CALL ratingUpdate(@productId,@averageRating,@numberOfRaters);";
+  mysqlConnection.query(
+    sql,
+    [
+      productinput.productId,
+      productinput.averageRating,
+      productinput.numberOfRaters,
+    ],
+    (err, rows, fields) => {
+      if (!err) res.send("Updated successfully");
+      else console.log(err);
+    }
+  );
+});
+
