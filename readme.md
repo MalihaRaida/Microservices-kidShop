@@ -1,9 +1,9 @@
-Setting Up ProductService Database:
+### Setting Up ProductService Database:###
 
 All query to setup with the database is given in the ProductServiceDB
 Just run the queries in the Datagrip/Mysql Workbench to create the new 'productservice' Database.
 
-Setting Up ProductService:
+### Setting Up ProductService:###
 
 opening terminal in ProductService folder
 run `npm install -g` will automatically download all packages
@@ -16,7 +16,7 @@ then run `node index.js` will start the server in port 3005.
 
 If the port is busy,then post number have to be changed in _index.js_ file.
 
-Setting Up ratingService:
+### Setting Up ratingService:###
 
 Opening the _RatingService.sln_ solution in Visual Studio
 
